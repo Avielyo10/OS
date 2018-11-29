@@ -36,7 +36,6 @@ int main(int argc, char const *argv[]){
             run(students, inPath);//run those compiled files, use file I/O redirection
             compare(students ,outPath);//compare the results from run method with \
             the output path file
-            cleanUp();//clean up all unnecessary files 
             writeToCsv(students);//write the scores to results.csv
             free(students); //let the students go ..  
         }

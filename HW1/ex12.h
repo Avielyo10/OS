@@ -26,13 +26,9 @@ void compile(student* students);
 void run(student* students,char* inputFile);
 void compare(student* students, char* outputFile);
 void writeToCsv(student* students);
-void cleanUp();
 
 int numOfStudents = 0; 
 
-void cleanUp(){
-    system("rm *.out *.txt");
-}
 
 void writeToCsv(student* students){
     int csvFd = open("results.csv",
@@ -61,8 +57,6 @@ void writeToCsv(student* students){
             exit(1);
         }
     }
-    
-  
     if(close(csvFd) < 0){
         perror("Error : File can't close - OS will take care of that");
         exit(1);
@@ -75,12 +69,12 @@ void compare(student* students, char* outputFile){
         if(!strcmp((students + i)->comment,"")){
             pid_t child_pid = fork();
             int child_status;
-            if(!child_pid){//child
-                // printf("compare: student name = %s, comment = %s\n",(students + i)->name,(students + i)->comment);
-                char studentOutput[22] = "";
-                strcpy(studentOutput,(students + i)->name);
-                strcat(studentOutput,".txt");//filename = <studentName>.txt
+            
+            char studentOutput[25] = "";
+            strcpy(studentOutput,(students + i)->name);
+            strcat(studentOutput,".txt");//studentOutput = <studentName>.txt
 
+            if(!child_pid){//child
                 char *args[]={"./bin/comp.out",studentOutput,outputFile,NULL};
                 execvp(args[0],args);
             }
@@ -93,6 +87,18 @@ void compare(student* students, char* outputFile){
                     }
                     if(WEXITSTATUS(child_status) == 1){
                         strcpy((students + i)->comment,"BAD_OUTPUT");
+                    }
+                    char compProg[25] = "";
+                    strcat(compProg,(students + i)->name);
+                    strcat(compProg,".out");//compProg = <studentName>.txt
+
+                    if(unlink(studentOutput) < 0){
+                        perror("Error : File can't be deleted");
+                        exit(1);
+                    }
+                    if(unlink(compProg) < 0){
+                        perror("Error : File can't be deleted");
+                        exit(1);
                     }
                 } 
             }
