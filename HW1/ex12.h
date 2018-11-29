@@ -176,8 +176,8 @@ void compile(student* students){
                 strcpy(name,(students + i)->name);
                 strcat(name,".out");
 
-                char *args[]={"/usr/bin/gcc",(students + i)->pathToCFile,"-o",name,NULL};
-                execv(args[0],args);
+                char *args[]={"gcc",(students + i)->pathToCFile,"-o",name,NULL};
+                execvp(args[0],args);
             }
             else{
                 waitpid(child_pid,&child_status,0);
