@@ -1,0 +1,3 @@
+/home/avielyosef/Desktop/university/OS/test
+/home/avielyosef/Desktop/university/OS/HW1/txt/txt1.txt
+/home/avielyosef/Desktop/university/OS/HW1/txt/txt2.txt
