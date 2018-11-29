@@ -85,8 +85,12 @@ void compare(student* students, char* outputFile){
                         strcpy((students + i)->comment,"GREAT_JOB");
                         (students + i)->grade = 100;
                     }
-                    if(WEXITSTATUS(child_status) == 1){
+                    else if(WEXITSTATUS(child_status) == 1){
                         strcpy((students + i)->comment,"BAD_OUTPUT");
+                    }
+                    else{
+                        perror("Error: exit status is not 1 or 2");
+                        exit(1);
                     }
                     char compProg[25] = "";
                     strcat(compProg,(students + i)->name);
@@ -119,7 +123,7 @@ void run(student* students, char* inputFile){
 
                 char filename[22] = "";
                 strcpy(filename,(students + i)->name);
-                strcat(filename,".txt");//filename = <studentName>.txt
+                strcat(filename,".txt");//filename = <studentName>.txt  
                 /*<---I/O redirection--->*/
                 int in = open(inputFile,O_RDONLY,0);
                 int out = open(filename,
