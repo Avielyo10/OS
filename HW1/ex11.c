@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <fcntl.h>
-
+/*Author - Aviel Yosef*/
   
 int main(int argc, char const *argv[]){
     // opening both files in read only mode 

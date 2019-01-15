@@ -1,5 +1,5 @@
 #include "ex12.h"  
-
+/*Author - Aviel Yosef*/
 int main(int argc, char const *argv[]){
     if(argc == 2){ 
         printf("-----------------------------------------------------------\n");        

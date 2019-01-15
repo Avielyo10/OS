@@ -8,7 +8,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <sys/stat.h>
-
+/*Author - Aviel Yosef*/
 typedef struct student{
     char path[100];
     char name[20];
@@ -94,7 +94,7 @@ void compare(student* students, char* outputFile){
                     }
                     char compProg[25] = "";
                     strcat(compProg,(students + i)->name);
-                    strcat(compProg,".out");//compProg = <studentName>.txt
+                    strcat(compProg,".out");//compProg = <studentName>.out
 
                     if(unlink(studentOutput) < 0){
                         perror("Error : File can't be deleted");
